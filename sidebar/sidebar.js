@@ -6,6 +6,22 @@ const targetTextArea = document.getElementById('target-text');
 const API_URL_DOMAIN = 'https://lingva.ml';
 let translationTimeout;
 
+async function saveConfigurationInStorage() {
+    const config = {
+        sourceLang: sourceLangSelect.value,
+        targetLang: targetLangSelect.value,
+    };
+    await browser.storage.local.set({ config });
+}
+
+async function loadConfigurationFromStorage() {
+    const { config } = await browser.storage.local.get('config');
+    if (!config) return;
+
+    sourceLangSelect.value = config.sourceLang || 'auto';
+    targetLangSelect.value = config.targetLang || 'en';
+}
+
 async function getLanguages(type) {
     try {
         const response = await fetch(
@@ -86,13 +102,13 @@ function swapLanguages() {
 
 swapButton.addEventListener('click', swapLanguages);
 sourceTextArea.addEventListener('input', runTranslation);
-sourceLangSelect.addEventListener('change', () => {
-    handleTextTranslation();
-    updateSwapButtonState();
-});
-targetLangSelect.addEventListener('change', () => {
-    handleTextTranslation();
-    updateSwapButtonState();
+
+[sourceLangSelect, targetLangSelect].forEach((select) => {
+    select.addEventListener('change', () => {
+        handleTextTranslation();
+        updateSwapButtonState();
+        saveConfigurationInStorage();
+    });
 });
 
 browser.runtime.onMessage.addListener((message) => {
@@ -103,4 +119,5 @@ browser.runtime.onMessage.addListener((message) => {
 });
 
 await populateLanguageSelects();
+await loadConfigurationFromStorage();
 updateSwapButtonState();
