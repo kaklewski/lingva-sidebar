@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lingva Translate in Sidebar</title>
+
+        <link rel="stylesheet" href="sidebar.css" />
+        <script type="module" src="sidebar.js" defer></script>
+    </head>
+    <body>
+        <div class="sidebar-container">
+            <div class="language-controls">
+                <select
+                    id="source-language"
+                    class="language-select"
+                    title="Source Language"
+                ></select>
+
+                <button
+                    id="swap-languages"
+                    type="button"
+                    title="Swap Languages"
+                >
+                    &#8646;
+                </button>
+
+                <select
+                    id="target-language"
+                    class="language-select"
+                    title="Target Language"
+                ></select>
+            </div>
+            <textarea
+                name="source-text"
+                id="source-text"
+                title="Source Text"
+                placeholder="Text"
+                autofocus
+            ></textarea>
+            <textarea
+                name="target-text"
+                id="target-text"
+                title="Target Text"
+                placeholder="Translation"
+                readonly
+            ></textarea>
+        </div>
+    </body>
+</html>

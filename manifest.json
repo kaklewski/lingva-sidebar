@@ -9,7 +9,7 @@
         "default_icon": {
             "48": "logo.svg"
         },
-        "default_panel": "sidebar.html"
+        "default_panel": "sidebar/sidebar.html"
     },
     "background": {
         "scripts": ["background.js"]
