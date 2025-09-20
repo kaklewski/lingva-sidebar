@@ -3,8 +3,21 @@ const targetLangSelect = document.getElementById('target-language');
 const swapButton = document.getElementById('swap-languages');
 const sourceTextArea = document.getElementById('source-text');
 const targetTextArea = document.getElementById('target-text');
+const clearButton = document.getElementById('clear-source-text');
+const copyButton = document.getElementById('copy-target-text');
 const API_URL_DOMAIN = 'https://lingva.ml';
 let translationTimeout;
+
+function clearSourceText() {
+    sourceTextArea.value = '';
+    runTranslation();
+}
+
+function copyTargetText() {
+    if (!targetTextArea.value) return;
+
+    navigator.clipboard.writeText(targetTextArea.value);
+}
 
 async function saveConfigurationInStorage() {
     const config = {
@@ -70,7 +83,7 @@ async function handleTextTranslation() {
     }
 
     try {
-        targetTextArea.value = 'Translating...';
+        targetTextArea.value = targetTextArea.value + '...';
         const url = `${API_URL_DOMAIN}/api/v1/${sourceLangSelect.value}/${targetLangSelect.value}/${query}`;
         const response = await fetch(url);
         if (!response.ok) {
@@ -100,8 +113,12 @@ function swapLanguages() {
     runTranslation();
 }
 
-swapButton.addEventListener('click', swapLanguages);
-sourceTextArea.addEventListener('input', runTranslation);
+browser.runtime.onMessage.addListener((message) => {
+    if (message.action === 'translate-text' && message.text) {
+        sourceTextArea.value = message.text;
+        runTranslation();
+    }
+});
 
 [sourceLangSelect, targetLangSelect].forEach((select) => {
     select.addEventListener('change', () => {
@@ -111,12 +128,10 @@ sourceTextArea.addEventListener('input', runTranslation);
     });
 });
 
-browser.runtime.onMessage.addListener((message) => {
-    if (message.action === 'translate-text' && message.text) {
-        sourceTextArea.value = message.text;
-        runTranslation();
-    }
-});
+swapButton.addEventListener('click', swapLanguages);
+sourceTextArea.addEventListener('input', runTranslation);
+clearButton.addEventListener('click', clearSourceText);
+copyButton.addEventListener('click', copyTargetText);
 
 await populateLanguageSelects();
 await loadConfigurationFromStorage();

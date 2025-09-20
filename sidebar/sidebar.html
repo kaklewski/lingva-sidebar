@@ -19,10 +19,28 @@
 
                 <button
                     id="swap-languages"
+                    class="icon-button"
                     type="button"
                     title="Swap Languages"
                 >
-                    &#8646;
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon-tabler-arrows-right-left"
+                    >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M21 7l-18 0" />
+                        <path d="M18 10l3 -3l-3 -3" />
+                        <path d="M6 20l-3 -3l3 -3" />
+                        <path d="M3 17l18 0" />
+                    </svg>
                 </button>
 
                 <select
@@ -31,20 +49,80 @@
                     title="Target Language"
                 ></select>
             </div>
-            <textarea
-                name="source-text"
-                id="source-text"
-                title="Source Text"
-                placeholder="Text"
-                autofocus
-            ></textarea>
-            <textarea
-                name="target-text"
-                id="target-text"
-                title="Target Text"
-                placeholder="Translation"
-                readonly
-            ></textarea>
+            <div class="translation-box translation-box--source">
+                <textarea
+                    name="source-text"
+                    id="source-text"
+                    class="translation-box__input"
+                    title="Source Text"
+                    placeholder="Text"
+                    autofocus
+                ></textarea>
+                <div class="translation-box__buttons">
+                    <button
+                        type="button"
+                        id="clear-source-text"
+                        class="icon-button"
+                        title="Clear Source Text"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon-tabler-x"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="translation-box translation-box--target">
+                <textarea
+                    name="target-text"
+                    id="target-text"
+                    class="translation-box__input"
+                    title="Target Text"
+                    placeholder="Translation"
+                    readonly
+                ></textarea>
+                <div class="translation-box__buttons">
+                    <button
+                        type="button"
+                        id="copy-target-text"
+                        class="icon-button icon-button--bg-reverse"
+                        title="Copy Text"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon-tabler-copy"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"
+                            />
+                            <path
+                                d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
