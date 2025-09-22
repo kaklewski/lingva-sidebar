@@ -8,6 +8,7 @@ const copyButton = document.getElementById('copy-target-text');
 const loading = document.getElementById('loading');
 const API_URL_DOMAIN = 'https://lingva.ml';
 let translationTimeout;
+let abortController;
 
 function clearSourceText() {
     sourceTextArea.value = '';
@@ -86,8 +87,11 @@ async function fetchTranslation(text, sourceLang, targetLang) {
     const query = encodeURIComponent(text.trim());
     if (!query) return '';
 
+    abortController = new AbortController();
+    const signal = abortController.signal;
+
     const url = `${API_URL_DOMAIN}/api/v1/${sourceLang}/${targetLang}/${query}`;
-    const response = await fetch(url);
+    const response = await fetch(url, { signal });
 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -98,8 +102,7 @@ async function fetchTranslation(text, sourceLang, targetLang) {
 function setLoadingState(isLoading) {
     const allButtons = document.querySelectorAll('button');
     const allSelects = document.querySelectorAll('select');
-    const allTextAreas = document.querySelectorAll('textarea');
-    const elements = [...allButtons, ...allSelects, ...allTextAreas];
+    const elements = [...allButtons, ...allSelects];
 
     elements.forEach((element) => (element.disabled = isLoading));
     loading.setAttribute('data-visible', isLoading ? 'true' : 'false');
@@ -124,6 +127,8 @@ async function translateText() {
 
         targetTextArea.value = translation;
     } catch (error) {
+        if (error.name === 'AbortError') return;
+
         console.error('Error fetching translation:', error);
         targetTextArea.value = 'Error fetching translation.';
     } finally {
@@ -132,6 +137,7 @@ async function translateText() {
 }
 
 function scheduleTranslation() {
+    abortController?.abort();
     clearTimeout(translationTimeout);
     translationTimeout = setTimeout(translateText, 750);
 }
