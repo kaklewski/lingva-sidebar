@@ -195,6 +195,18 @@ body {
     animation: spin 0.5s linear infinite;
 }
 
+#copy-target-text .icon--check {
+    display: none;
+}
+
+#copy-target-text[data-text-copied='true'] .icon--check {
+    display: block;
+}
+
+#copy-target-text[data-text-copied='true'] .icon--copy {
+    display: none;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

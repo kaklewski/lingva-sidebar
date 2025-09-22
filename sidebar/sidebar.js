@@ -8,6 +8,7 @@ const copyButton = document.getElementById('copy-target-text');
 const loading = document.getElementById('loading');
 const API_URL_DOMAIN = 'https://lingva.ml';
 let translationTimeout;
+let copyTimeout;
 let abortController;
 
 function clearSourceText() {
@@ -15,10 +16,16 @@ function clearSourceText() {
     scheduleTranslation();
 }
 
-function copyTargetText() {
-    if (!targetTextArea.value) return;
+function handleCopying() {
+    clearTimeout(copyTimeout);
 
-    navigator.clipboard.writeText(targetTextArea.value);
+    navigator.clipboard.writeText(targetTextArea?.value);
+
+    copyButton.setAttribute('data-text-copied', 'true');
+
+    copyTimeout = setTimeout(() => {
+        copyButton.setAttribute('data-text-copied', 'false');
+    }, 2000);
 }
 
 async function saveConfigurationInStorage() {
@@ -141,7 +148,7 @@ async function translateText() {
 function scheduleTranslation() {
     abortController?.abort();
     clearTimeout(translationTimeout);
-    translationTimeout = setTimeout(translateText, 750);
+    translationTimeout = setTimeout(translateText, 500);
 }
 
 function swapLanguages() {
@@ -175,7 +182,7 @@ browser.runtime.onMessage.addListener((message) => {
 swapButton.addEventListener('click', swapLanguages);
 sourceTextArea.addEventListener('input', scheduleTranslation);
 clearButton.addEventListener('click', clearSourceText);
-copyButton.addEventListener('click', copyTargetText);
+copyButton.addEventListener('click', handleCopying);
 
 await populateLanguageSelects();
 await loadConfigurationFromStorage();
