@@ -10,7 +10,7 @@ let translationTimeout;
 
 function clearSourceText() {
     sourceTextArea.value = '';
-    runTranslation();
+    scheduleTranslation();
 }
 
 function copyTargetText() {
@@ -29,28 +29,18 @@ async function saveConfigurationInStorage() {
 
 async function loadConfigurationFromStorage() {
     const { config } = await browser.storage.local.get('config');
-    if (!config) return;
 
-    sourceLangSelect.value = config.sourceLang || 'auto';
-    targetLangSelect.value = config.targetLang || 'en';
+    sourceLangSelect.value = config?.sourceLang || 'auto';
+    targetLangSelect.value = config?.targetLang || 'en';
 }
 
-async function getLanguages(type) {
-    try {
-        const response = await fetch(
-            `${API_URL_DOMAIN}/api/v1/languages/${type}`,
-        );
+async function fetchLanguages(type) {
+    const response = await fetch(`${API_URL_DOMAIN}/api/v1/languages/${type}`);
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-        const data = await response.json();
-        const languages = data.languages;
-        return languages;
-    } catch (error) {
-        console.error('Error fetching languages:', error);
-    }
+    const data = await response.json();
+    return data.languages;
 }
 
 function appendOptions(selectElement, languages) {
@@ -63,43 +53,78 @@ function appendOptions(selectElement, languages) {
 }
 
 async function populateLanguageSelects() {
-    const sourceLanguages = await getLanguages('source');
-    const targetLanguages = await getLanguages('target');
+    try {
+        const { languages: languagesInStorage } =
+            await browser.storage.session.get('languages');
 
-    appendOptions(sourceLangSelect, sourceLanguages);
-    appendOptions(targetLangSelect, targetLanguages);
+        const sourceLanguages =
+            languagesInStorage?.source || (await fetchLanguages('source'));
+        const targetLanguages =
+            languagesInStorage?.target || (await fetchLanguages('target'));
+
+        appendOptions(sourceLangSelect, sourceLanguages);
+        appendOptions(targetLangSelect, targetLanguages);
+
+        if (!languagesInStorage) {
+            const languages = {
+                source: sourceLanguages,
+                target: targetLanguages,
+            };
+            await browser.storage.session.set({ languages });
+        }
+    } catch (error) {
+        console.error('Error fetching languages:', error);
+    }
 }
 
 function updateSwapButtonState() {
     swapButton.disabled = sourceLangSelect.value === 'auto';
 }
 
-async function handleTextTranslation() {
-    const query = encodeURIComponent(sourceTextArea.value.trim());
+async function fetchTranslation(text, sourceLang, targetLang) {
+    const query = encodeURIComponent(text.trim());
+    if (!query) return '';
 
-    if (query.length === 0) {
+    const url = `${API_URL_DOMAIN}/api/v1/${sourceLang}/${targetLang}/${query}`;
+    const response = await fetch(url);
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const data = await response.json();
+    return data.translation;
+}
+
+async function translateText() {
+    const text = sourceTextArea.value.trim();
+
+    if (!text) {
         targetTextArea.value = '';
         return;
     }
 
     try {
-        targetTextArea.value = targetTextArea.value + '...';
-        const url = `${API_URL_DOMAIN}/api/v1/${sourceLangSelect.value}/${targetLangSelect.value}/${query}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        targetTextArea.value = data.translation;
+        targetTextArea.value += '...';
+        copyButton.disabled = true;
+        clearButton.disabled = true;
+
+        const translation = await fetchTranslation(
+            text,
+            sourceLangSelect.value,
+            targetLangSelect.value,
+        );
+
+        targetTextArea.value = translation;
+        copyButton.disabled = false;
+        clearButton.disabled = false;
     } catch (error) {
         console.error('Error fetching translation:', error);
         targetTextArea.value = 'Error fetching translation.';
     }
 }
 
-function runTranslation() {
+function scheduleTranslation() {
     clearTimeout(translationTimeout);
-    translationTimeout = setTimeout(handleTextTranslation, 500);
+    translationTimeout = setTimeout(translateText, 750);
 }
 
 function swapLanguages() {
@@ -110,26 +135,26 @@ function swapLanguages() {
     sourceTextArea.value = targetTextArea.value;
     targetTextArea.value = '';
 
-    runTranslation();
+    scheduleTranslation();
 }
 
 browser.runtime.onMessage.addListener((message) => {
     if (message.action === 'translate-text' && message.text) {
         sourceTextArea.value = message.text;
-        runTranslation();
+        scheduleTranslation();
     }
 });
 
 [sourceLangSelect, targetLangSelect].forEach((select) => {
     select.addEventListener('change', () => {
-        handleTextTranslation();
+        translateText();
         updateSwapButtonState();
         saveConfigurationInStorage();
     });
 });
 
 swapButton.addEventListener('click', swapLanguages);
-sourceTextArea.addEventListener('input', runTranslation);
+sourceTextArea.addEventListener('input', scheduleTranslation);
 clearButton.addEventListener('click', clearSourceText);
 copyButton.addEventListener('click', copyTargetText);
 
