@@ -144,11 +144,13 @@ function swapLanguages() {
     sourceTextArea.value = targetTextArea.value;
     targetTextArea.value = '';
 
+    saveConfigurationInStorage();
     scheduleTranslation();
 }
 
 browser.runtime.onMessage.addListener((message) => {
     if (message.action === 'translate-text' && message.text) {
+        sourceLangSelect.value = 'auto'
         sourceTextArea.value = message.text;
         scheduleTranslation();
     }
