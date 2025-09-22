@@ -100,11 +100,13 @@ async function fetchTranslation(text, sourceLang, targetLang) {
 }
 
 function setLoadingState(isLoading) {
-    const allButtons = document.querySelectorAll('button');
-    const allSelects = document.querySelectorAll('select');
-    const elements = [...allButtons, ...allSelects];
+    const buttons = document.querySelectorAll('button');
+    const whitelist = [clearButton];
 
-    elements.forEach((element) => (element.disabled = isLoading));
+    buttons.forEach((button) => {
+        if (!whitelist.includes(button)) button.disabled = isLoading;
+    });
+
     loading.setAttribute('data-visible', isLoading ? 'true' : 'false');
 }
 
@@ -156,7 +158,7 @@ function swapLanguages() {
 
 browser.runtime.onMessage.addListener((message) => {
     if (message.action === 'translate-text' && message.text) {
-        sourceLangSelect.value = 'auto'
+        sourceLangSelect.value = 'auto';
         sourceTextArea.value = message.text;
         scheduleTranslation();
     }
@@ -164,7 +166,7 @@ browser.runtime.onMessage.addListener((message) => {
 
 [sourceLangSelect, targetLangSelect].forEach((select) => {
     select.addEventListener('change', () => {
-        translateText();
+        scheduleTranslation();
         updateSwapButtonState();
         saveConfigurationInStorage();
     });
