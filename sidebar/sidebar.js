@@ -5,6 +5,7 @@ const sourceTextArea = document.getElementById('source-text');
 const targetTextArea = document.getElementById('target-text');
 const clearButton = document.getElementById('clear-source-text');
 const copyButton = document.getElementById('copy-target-text');
+const loading = document.getElementById('loading');
 const API_URL_DOMAIN = 'https://lingva.ml';
 let translationTimeout;
 
@@ -94,6 +95,16 @@ async function fetchTranslation(text, sourceLang, targetLang) {
     return data.translation;
 }
 
+function setLoadingState(isLoading) {
+    const allButtons = document.querySelectorAll('button');
+    const allSelects = document.querySelectorAll('select');
+    const allTextAreas = document.querySelectorAll('textarea');
+    const elements = [...allButtons, ...allSelects, ...allTextAreas];
+
+    elements.forEach((element) => (element.disabled = isLoading));
+    loading.setAttribute('data-visible', isLoading ? 'true' : 'false');
+}
+
 async function translateText() {
     const text = sourceTextArea.value.trim();
 
@@ -102,11 +113,9 @@ async function translateText() {
         return;
     }
 
-    try {
-        targetTextArea.value += '...';
-        copyButton.disabled = true;
-        clearButton.disabled = true;
+    setLoadingState(true);
 
+    try {
         const translation = await fetchTranslation(
             text,
             sourceLangSelect.value,
@@ -114,11 +123,11 @@ async function translateText() {
         );
 
         targetTextArea.value = translation;
-        copyButton.disabled = false;
-        clearButton.disabled = false;
     } catch (error) {
         console.error('Error fetching translation:', error);
         targetTextArea.value = 'Error fetching translation.';
+    } finally {
+        setLoadingState(false);
     }
 }
 

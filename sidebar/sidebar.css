@@ -123,6 +123,7 @@ body {
 
 .translation-box {
     flex-grow: 1;
+    position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--accent);
@@ -166,4 +167,39 @@ body {
     justify-content: flex-end;
     gap: var(--distance-small);
     padding: var(--distance-small);
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.loading-overlay[data-visible='false'] {
+    display: none;
+}
+
+.loading-overlay__spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 0.125rem solid var(--bg);
+    border-top-color: var(--accent);
+    border-right-color: var(--accent);
+    border-radius: 100%;
+    rotate: -45deg;
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
