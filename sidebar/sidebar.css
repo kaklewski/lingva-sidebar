@@ -164,6 +164,9 @@ body {
 }
 
 .translation-box__buttons {
+    position: absolute;
+    right: var(--distance-small);
+    bottom: var(--distance-small);
     display: flex;
     justify-content: flex-end;
     gap: var(--distance-small);
