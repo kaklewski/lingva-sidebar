@@ -1,11 +1,12 @@
 {
     "manifest_version": 3,
-    "name": "Lingva Translate in Sidebar",
+    "name": "__MSG_extension_name__",
     "version": "1.0.0",
-    "description": "Adds Lingva Translate to Firefox sidebar.",
+    "description": "__MSG_extension_description__",
     "permissions": ["contextMenus", "activeTab", "storage"],
+    "default_locale": "en",
     "sidebar_action": {
-        "default_title": "Lingva Translate",
+        "default_title": "__MSG_sidebar_title__",
         "default_icon": {
             "48": "logo.svg"
         },

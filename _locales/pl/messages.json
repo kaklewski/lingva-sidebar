@@ -1,0 +1,58 @@
+{
+    "extension_name": {
+        "message": "Tłumaczenie Lingva na pasku bocznym",
+        "description": "Oficjalna nazwa rozszerzenia"
+    },
+    "extension_description": {
+        "message": "Dodaje tłumaczenie Lingva do paska bocznego.",
+        "description": "Krótki opis funkcji rozszerzenia"
+    },
+    "sidebar_title": {
+        "message": "Tłumaczenie Lingva",
+        "description": "Nagłówek wyświetlany u góry paska bocznego"
+    },
+    "source_language_title": {
+        "message": "Język źródłowy",
+        "description": "Etykieta pola wyboru języka, z którego tłumaczony jest tekst"
+    },
+    "swap_languages_title": {
+        "message": "Zamień języki",
+        "description": "Podpowiedź przycisku zamieniającego język źródłowy z docelowym"
+    },
+    "target_language_title": {
+        "message": "Język docelowy",
+        "description": "Etykieta pola wyboru języka, na który tłumaczony jest tekst"
+    },
+    "source_text_label": {
+        "message": "Tekst źródłowy",
+        "description": "Etykieta pola do wpisania tekstu przeznaczonego do tłumaczenia"
+    },
+    "source_text_placeholder": {
+        "message": "Tekst",
+        "description": "Tekst zastępczy w polu tekstu źródłowego"
+    },
+    "clear_source_text_title": {
+        "message": "Wyczyść tekst źródłowy",
+        "description": "Podpowiedź przycisku usuwającego zawartość pola tekstu źródłowego"
+    },
+    "target_text_label": {
+        "message": "Tłumaczenie",
+        "description": "Etykieta pola tekstowego wyświetlającego wynik tłumaczenia"
+    },
+    "target_text_placeholder": {
+        "message": "Tłumaczenie",
+        "description": "Tekst zastępczy w polu tłumaczenia"
+    },
+    "copy_text_title": {
+        "message": "Kopiuj tekst",
+        "description": "Podpowiedź przycisku kopiującego wynik tłumaczenia do schowka"
+    },
+    "footer_license": {
+        "message": "Opublikowano na licencji GNU GPL v3",
+        "description": "Informacja o licencji wyświetlana w stopce"
+    },
+    "footer_lingva_credit": {
+        "message": "Tłumaczenia dostarczone przez Lingva (thedaviddelta i współautorzy)",
+        "description": "Informacja w stopce o Lingvie i jej autorach"
+    }
+}

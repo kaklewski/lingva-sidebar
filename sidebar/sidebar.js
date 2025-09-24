@@ -179,6 +179,28 @@ browser.runtime.onMessage.addListener((message) => {
     });
 });
 
+function applyLocale() {
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        const message = browser.i18n.getMessage(key);
+
+        if (!message) return;
+
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            if (el.hasAttribute('placeholder')) {
+                el.placeholder = message;
+                return;
+            }
+        }
+
+        if (el.hasAttribute('title')) {
+            el.title = message;
+        } else {
+            el.textContent = message;
+        }
+    });
+}
+
 swapButton.addEventListener('click', swapLanguages);
 sourceTextArea.addEventListener('input', scheduleTranslation);
 clearButton.addEventListener('click', clearSourceText);
@@ -186,4 +208,5 @@ copyButton.addEventListener('click', handleCopying);
 
 await populateLanguageSelects();
 await loadConfigurationFromStorage();
+applyLocale();
 updateSwapButtonState();

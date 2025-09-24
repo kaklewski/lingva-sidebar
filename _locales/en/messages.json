@@ -1,0 +1,58 @@
+{
+    "extension_name": {
+        "message": "Lingva Translate in Sidebar",
+        "description": "Name of the extension"
+    },
+    "extension_description": {
+        "message": "Adds Lingva Translate to the sidebar.",
+        "description": "Short description of what the extension does"
+    },
+    "sidebar_title": {
+        "message": "Lingva Translate",
+        "description": "Title displayed at the top of the sidebar"
+    },
+    "source_language_title": {
+        "message": "Source Language",
+        "description": "Tooltip for the select element where the user chooses the source language"
+    },
+    "swap_languages_title": {
+        "message": "Swap Languages",
+        "description": "Tooltip for the button that swaps source and target languages"
+    },
+    "target_language_title": {
+        "message": "Target Language",
+        "description": "Tooltip for the select element where the user chooses the target language"
+    },
+    "source_text_label": {
+        "message": "Source Text",
+        "description": "Label for the textarea where the user enters text to translate"
+    },
+    "source_text_placeholder": {
+        "message": "Text",
+        "description": "Placeholder text inside the source textarea"
+    },
+    "clear_source_text_title": {
+        "message": "Clear Source Text",
+        "description": "Tooltip for the button that clears the source text"
+    },
+    "target_text_label": {
+        "message": "Translation",
+        "description": "Label for the textarea showing the translation"
+    },
+    "target_text_placeholder": {
+        "message": "Translation",
+        "description": "Placeholder text inside the translation textarea"
+    },
+    "copy_text_title": {
+        "message": "Copy Text",
+        "description": "Tooltip for the button that copies the translation to clipboard"
+    },
+    "footer_license": {
+        "message": "Published under the GNU GPL v3 license",
+        "description": "License notice in the footer"
+    },
+    "footer_lingva_credit": {
+        "message": "Translations provided by Lingva (thedaviddelta & contributors)",
+        "description": "Credit notice in the footer for the Lingva translation service"
+    }
+}
