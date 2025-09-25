@@ -53,10 +53,23 @@ async function fetchLanguages(type) {
 }
 
 function appendOptions(selectElement, languages) {
-    for (const language of languages) {
+    const sortedLanguages = [...languages].sort((a, b) => {
+        if (a.code === 'auto') return -1;
+        if (b.code === 'auto') return 1;
+
+        const nameA = browser?.i18n?.getMessage(a.code) || a.name;
+        const nameB = browser?.i18n?.getMessage(b.code) || b.name;
+
+        return nameA.localeCompare(nameB, navigator.language, {
+            sensitivity: 'base',
+        });
+    });
+
+    for (const language of sortedLanguages) {
         const option = document.createElement('option');
         option.value = language.code;
-        option.textContent = language.name;
+        option.textContent =
+            browser?.i18n?.getMessage(language.code) || language.name;
         selectElement.appendChild(option);
     }
 }
@@ -113,6 +126,7 @@ function setLoadingState(isLoading) {
     buttons.forEach((button) => {
         if (!whitelist.includes(button)) button.disabled = isLoading;
     });
+    updateSwapButtonState();
 
     loading.setAttribute('data-visible', isLoading ? 'true' : 'false');
 }
