@@ -44,7 +44,7 @@
         "description": "Placeholder text inside the translation textarea"
     },
     "copy_text_title": {
-        "message": "Copy Text",
+        "message": "Copy Translation",
         "description": "Tooltip for the button that copies the translation to clipboard"
     },
     "footer_license": {

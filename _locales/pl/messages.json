@@ -44,7 +44,7 @@
         "description": "Tekst zastępczy w polu tłumaczenia"
     },
     "copy_text_title": {
-        "message": "Kopiuj tekst",
+        "message": "Kopiuj przetłumaczony tekst",
         "description": "Podpowiedź przycisku kopiującego wynik tłumaczenia do schowka"
     },
     "footer_license": {
