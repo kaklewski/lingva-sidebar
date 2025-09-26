@@ -65,15 +65,10 @@ body {
 
 .language-controls {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: var(--distance-large);
-
-    @media (width < 400px) {
-        flex-direction: column;
-    }
+    gap: clamp(var(--distance-small), 5vw, var(--distance-large));
 }
 
 .language-select {
