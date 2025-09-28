@@ -4,7 +4,7 @@
 
 # Lingva Translate in Sidebar
 
-A **Firefox extension** that lets you use **Lingva Translate** right in your browser’s sidebar. You can quickly translate text without leaving the page you’re on.
+A **Firefox extension** that lets you use [**Lingva Translate**](https://github.com/thedaviddelta/lingva-translate) right in your browser’s sidebar. You can quickly translate text without leaving the page you’re on.
 
 This add-on is an unofficial client for **Lingva**, an open-source alternative front-end for Google Translate that works without ads or tracking.
 
@@ -88,4 +88,5 @@ This will generate a `.zip` file in the `web-ext-artifacts` folder.
 
 ## 🎨 Credits
 
--   **Main icon** – [Lingva Translate Logo](https://github.com/thedaviddelta/lingva-translate/blob/main/public/logo.svg)
+-   **Main icon** – [Lingva Translate Logo](https://github.com/thedaviddelta/lingva-translate/blob/main/public/logo.svg) (AGPL v3 License)
+-   **UI icons** – [Arrows Right Left](https://tabler.io/icons/icon/arrows-right-left), [X](https://tabler.io/icons/icon/x) & [Copy](https://tabler.io/icons/icon/copy) from [Tabler Icons](https://tabler.io/icons) (MIT License)
