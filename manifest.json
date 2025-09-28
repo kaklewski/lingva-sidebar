@@ -4,6 +4,14 @@
     "version": "1.0.0",
     "description": "__MSG_extension_description__",
     "permissions": ["contextMenus", "activeTab", "storage"],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "lingva-sidebar@kaklewski.pl",
+            "data_collection_permissions": {
+                "required": ["none"]
+            }
+        }
+    },
     "default_locale": "en",
     "sidebar_action": {
         "default_title": "__MSG_sidebar_title__",
