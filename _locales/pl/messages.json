@@ -1,15 +1,15 @@
 {
     "extension_name": {
-        "message": "Tłumaczenie Lingva na pasku bocznym",
+        "message": "Lingva Translate w panelu bocznym",
         "description": "Oficjalna nazwa rozszerzenia"
     },
     "extension_description": {
-        "message": "Dodaje tłumaczenie Lingva do paska bocznego.",
+        "message": "Dodaje Lingva Translate do panelu bocznego.",
         "description": "Krótki opis funkcji rozszerzenia"
     },
     "sidebar_title": {
-        "message": "Tłumaczenie Lingva",
-        "description": "Nagłówek wyświetlany u góry paska bocznego"
+        "message": "Lingva Translate",
+        "description": "Nagłówek wyświetlany na górze panelu bocznego"
     },
     "source_language_title": {
         "message": "Język źródłowy",
