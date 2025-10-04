@@ -6,7 +6,8 @@ const targetTextArea = document.getElementById('target-text');
 const clearButton = document.getElementById('clear-source-text');
 const copyButton = document.getElementById('copy-target-text');
 const loading = document.getElementById('loading');
-const API_URL_DOMAIN = 'https://lingva.ml';
+const apiUrls = ['https://lingva.ml', 'https://translate.plausibility.cloud'];
+let apiUrlIndex = 0;
 let translationTimeout;
 let copyTimeout;
 let abortController;
@@ -44,12 +45,26 @@ async function loadConfigurationFromStorage() {
 }
 
 async function fetchLanguages(type) {
-    const response = await fetch(`${API_URL_DOMAIN}/api/v1/languages/${type}`);
+    try {
+        const response = await fetch(
+            `${apiUrls[apiUrlIndex]}/api/v1/languages/${type}`,
+        );
 
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-    const data = await response.json();
-    return data.languages;
+        const data = await response.json();
+        return data.languages;
+    } catch (error) {
+        if (apiUrlIndex < apiUrls.length - 1) {
+            apiUrlIndex += 1;
+            return fetchLanguages(type);
+        } else {
+            apiUrlIndex = 0;
+            throw error;
+        }
+    }
 }
 
 function appendOptions(selectElement, languages) {
@@ -104,19 +119,31 @@ function updateSwapButtonState() {
 }
 
 async function fetchTranslation(text, sourceLang, targetLang) {
-    const query = encodeURIComponent(text.trim());
-    if (!query) return '';
+    try {
+        const query = encodeURIComponent(text.trim());
+        if (!query) return '';
 
-    abortController = new AbortController();
-    const signal = abortController.signal;
+        abortController = new AbortController();
+        const signal = abortController.signal;
 
-    const url = `${API_URL_DOMAIN}/api/v1/${sourceLang}/${targetLang}/${query}`;
-    const response = await fetch(url, { signal });
+        const url = `${apiUrls[apiUrlIndex]}/api/v1/${sourceLang}/${targetLang}/${query}`;
+        const response = await fetch(url, { signal });
 
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-    const data = await response.json();
-    return data.translation;
+        const data = await response.json();
+        return data.translation;
+    } catch (error) {
+        if (apiUrlIndex < apiUrls.length - 1) {
+            apiUrlIndex += 1;
+            return fetchTranslation(text, sourceLang, targetLang);
+        } else {
+            apiUrlIndex = 0;
+            throw error;
+        }
+    }
 }
 
 function setLoadingState(isLoading) {
