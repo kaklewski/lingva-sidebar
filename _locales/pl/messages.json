@@ -55,6 +55,10 @@
         "message": "Tłumaczenia dostarczone przez Lingva (thedaviddelta i współautorzy)",
         "description": "Informacja w stopce o Lingvie i jej autorach"
     },
+    "right_click_translate": {
+        "message": "Przetłumacz zaznaczony tekst",
+        "description": "Element menu kontekstowego do przetłumaczenia zaznaczonego tekstu"
+    },
     "auto": {
         "message": "Wykryj język",
         "description": "Opcja automatycznie wykrywająca język"

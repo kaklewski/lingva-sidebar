@@ -1,7 +1,7 @@
 function createContextMenu() {
     browser.contextMenus.create({
         id: 'translate-selection',
-        title: 'Translate selected text',
+        title: browser.i18n.getMessage('right_click_translate'),
         contexts: ['selection'],
     });
 }

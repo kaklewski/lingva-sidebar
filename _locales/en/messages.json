@@ -54,5 +54,9 @@
     "footer_lingva_credit": {
         "message": "Translations provided by Lingva (thedaviddelta & contributors)",
         "description": "Credit notice in the footer for the Lingva translation service"
+    },
+    "right_click_translate": {
+        "message": "Translate selected text",
+        "description": "Context menu item to translate selected text"
     }
 }
