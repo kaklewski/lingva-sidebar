@@ -7,6 +7,10 @@
         "message": "Adds Lingva Translate to the sidebar.",
         "description": "Short description of what the extension does"
     },
+    "toggle_sidebar_shortcut_description": {
+        "message": "Open or close Lingva Translate",
+        "description": "Description of the keyboard shortcut for opening and closing Lingva in the sidebar"
+    },
     "sidebar_title": {
         "message": "Lingva Translate",
         "description": "Title displayed at the top of the sidebar"

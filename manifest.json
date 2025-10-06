@@ -23,6 +23,15 @@
     "background": {
         "scripts": ["background.js"]
     },
+    "commands": {
+        "_execute_sidebar_action": {
+            "suggested_key": {
+                "default": "Shift+Alt+L",
+                "mac": "Command+Shift+L"
+            },
+            "description": "__MSG_toggle_sidebar_shortcut_description__"
+        }
+    },
     "icons": {
         "48": "logo.svg"
     }

@@ -7,6 +7,10 @@
         "message": "Dodaje Lingva Translate do panelu bocznego.",
         "description": "Krótki opis funkcji rozszerzenia"
     },
+    "toggle_sidebar_shortcut_description": {
+        "message": "Otwórz lub zamknij Lingva Translate",
+        "description": "Opis skrótu klawiaturowego do otwierania i zamykania Lingva w panelu bocznym"
+    },
     "sidebar_title": {
         "message": "Lingva Translate",
         "description": "Nagłówek wyświetlany na górze panelu bocznego"
