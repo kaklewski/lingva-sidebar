@@ -15,6 +15,11 @@ This add-on is an unofficial client for **Lingva**, an open-source alternative f
 -   Translate selected text directly from any webpage
 -   Lightweight, simple, and privacy-friendly
 
+## 📦 Installation
+
+Amnesia is available on the official Mozilla Add-ons store:  
+[**Get it on Firefox Add-ons**](https://addons.mozilla.org/addon/lingva-in-sidebar/)
+
 ## 🤝 Contributing
 
 Contributions are welcome! You can help by:
