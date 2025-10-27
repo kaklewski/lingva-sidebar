@@ -1,1 +1,65 @@
-
+{
+    "extension_name": {
+        "message": "Lingva Traduction dans la barre latérale",
+        "description": "Nom de l'extension"
+    },
+    "extension_description": {
+        "message": "Ajouter Lingva Traduction à la barre latérale.",
+        "description": "Courte description de ce que fait l'extension"
+    },
+    "toggle_sidebar_shortcut_description": {
+        "message": "Ouvrir ou fermer Lingva Traduction",
+        "description": "Description des raccourcis clavier pour ouvrir et fermer Lingva dans la barre latérale"
+    },
+        "message": "Lingva Traduction",
+        "description": "Titre affiché en hgaut de la barre latérale"
+    },
+    "source_language_title": {
+        "message": "Langue source",
+        "description": "Info-bulle pour l'élément de sélection dans lequel l'utilisateur choisit la langue source"
+    },
+    "swap_languages_title": {
+        "message": "Permuter les langues",
+        "description": "Info-bulle pour le bouton qui permute la langue source ou la langue cible"
+    },
+    "target_language_title": {
+        "message": "Langue cible",
+        "description": "Info-bulle pour l'élément de sélection dans lequel l'utilisateur choisit la langue cible"
+    },
+    "source_text_label": {
+        "message": "Texte",
+        "description": "Label pour l'espace de texte dans lequel l'utilisateur saisit le texte à traduire"
+    },
+    "source_text_placeholder": {
+        "message": "Texte",
+        "description": "Texte d'espace réservé à l'intérieur de la zone de texte source"
+    },
+    "clear_source_text_title": {
+        "message": "Effacer le texte source",
+        "description": "Info-bulle du bouton qui efface le texte source"
+    },
+    "target_text_label": {
+        "message": "Traduction",
+        "description": "Étiquette pour la zone de texte affichant la traduction"
+    },
+    "target_text_placeholder": {
+        "message": "Traduction",
+        "description": "Texte d'espace réservé à l'intérieur de la zone de texte de traduction"
+    },
+    "copy_text_title": {
+        "message": "Copier la traduction",
+        "description": "Info-bulle pour le bouton qui copie la traduction dans le presse-papier"
+    },
+    "footer_license": {
+        "message": "Publié sous licence GNU GPL v3",
+        "description": "Avis de licence en pied de page"
+    },
+    "footer_lingva_credit": {
+        "message": "Traductions fournies par Lingva (thedaviddelta & contributeurs)",
+        "description": "Avis de crédit en pied de page pour le service de traduction Lingva"
+    },
+    "right_click_translate": {
+        "message": "Traduire le texte sélectionné",
+        "description": "Item de menu contextuel pour traduire le texte sélectionné"
+    }
+}
