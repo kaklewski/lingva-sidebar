@@ -11,6 +11,7 @@
         "message": "Ouvrir ou fermer Lingva Traduction",
         "description": "Description des raccourcis clavier pour ouvrir et fermer Lingva dans la barre latérale"
     },
+    "sidebar_title": {
         "message": "Lingva Traduction",
         "description": "Titre affiché en hgaut de la barre latérale"
     },
