@@ -33,15 +33,15 @@ Please follow **Conventional Commits** when creating commits.
 
 ### 🌐 Translations
 
-The extension currently supports **English 🇬🇧** and **Polish 🇵🇱**.  
-Contributions for additional languages are welcome!
+The extension currently supports **English 🇬🇧**, **Polish 🇵🇱** and **French 🇫🇷**. Contributions for additional languages are welcome!
 
 To add a translation:
 
 1. Fork this repository.
 2. Copy the file `_locales/en/messages.json` into a new folder named after your target locale code (for example: `_locales/de/messages.json` for German, `_locales/it/messages.json` for Italian).
 3. Translate the values of the `"message"` and `"description"` fields for each entry.
-4. Submit a pull request.
+4. You can translate language names by adding them to the new locale file. Use the language code as the key (for example: `"de": { "message": "Deutsch"}`). You can find the full list of language codes in the Polish translation file `_locales/pl/messages.json`.
+5. Submit a pull request.
 
 For reference, see [MDN – Internationalization in extensions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Internationalization).
 
